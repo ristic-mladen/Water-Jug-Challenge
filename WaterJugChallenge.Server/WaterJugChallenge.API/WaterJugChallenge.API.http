@@ -1,0 +1,7 @@
+@WaterJugChallenge.API_HostAddress = http://localhost:5202
+
+### Find Solution for Water Jug Challenge
+GET {{WaterJugChallenge.API_HostAddress}}/waterjugchallenge/findsolution?jug1Capacity=3&jug2Capacity=5&targetAmount=4
+Accept: application/json
+
+###

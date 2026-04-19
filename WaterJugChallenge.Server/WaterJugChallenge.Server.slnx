@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/01_WebAPI/">
+    <Project Path="WaterJugChallenge.API.Controllers/WaterJugChallenge.API.Controllers.csproj" Id="549ca9c8-9205-4285-ae22-a8864d5d9f53" />
+    <Project Path="WaterJugChallenge.API/WaterJugChallenge.API.csproj" />
+  </Folder>
+  <Folder Name="/02_Model/">
+    <Project Path="WaterJugChallenge.Interfaces/WaterJugChallenge.Interfaces.csproj" />
+    <Project Path="WaterJugChallenge.Model/WaterJugChallenge.Model.csproj" />
+  </Folder>
+  <Folder Name="/03_Service/">
+    <Project Path="WaterJugChallenge.BFSSolutionFinder.UnitTests/WaterJugChallenge.BFSSolutionFinder.UnitTests.csproj" />
+    <Project Path="WaterJugChallenge.BFSSolutionFinder/WaterJugChallenge.BFSSolutionFinder.csproj" />
+  </Folder>
+</Solution>
