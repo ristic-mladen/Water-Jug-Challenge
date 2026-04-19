@@ -10,7 +10,7 @@
       <div class="relative grid gap-2 md:grid-cols-[1fr_auto] md:items-end">
         <label class="form-control w-full">
           <span class="label-text">Jug 1 capacity</span>
-          <input class="input input-bordered w-full" type="number" min="1" value.bind="form.jug1Capacity & validate">
+          <input class="input input-bordered w-full" type="number" min="1" value.bind="form.jug1Capacity | number & validate">
         </label>
         <button class="btn btn-outline" type="button" click.trigger="toggleBucketColorPicker('jug1')">
           <span class="inline-block h-4 w-4 rounded-full border border-base-content/40" style.bind="{ backgroundColor: jug1Color }"></span>
@@ -26,7 +26,7 @@
       <div class="relative grid gap-2 md:grid-cols-[1fr_auto] md:items-end">
         <label class="form-control w-full">
           <span class="label-text">Jug 2 capacity</span>
-          <input class="input input-bordered w-full" type="number" min="1" value.bind="form.jug2Capacity & validate">
+          <input class="input input-bordered w-full" type="number" min="1" value.bind="form.jug2Capacity | number & validate">
         </label>
         <button class="btn btn-outline" type="button" click.trigger="toggleBucketColorPicker('jug2')">
           <span class="inline-block h-4 w-4 rounded-full border border-base-content/40" style.bind="{ backgroundColor: jug2Color }"></span>
@@ -41,7 +41,7 @@
 
       <label class="form-control">
         <span class="label-text">Target amount</span>
-        <input class="input input-bordered" type="number" min="1" value.bind="form.targetAmount & validate">
+        <input class="input input-bordered" type="number" min="1" value.bind="form.targetAmount | number & validate">
       </label>
 
       <div class="mt-1">

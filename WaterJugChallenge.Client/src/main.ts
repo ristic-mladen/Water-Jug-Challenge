@@ -12,6 +12,7 @@ import { bucketColorsActionHandler, initialBucketColorsState } from './state/buc
 import './app.css';
 import * as en from './locale/en/translation.json';
 import { JugActionValueConverter } from './value-converters/jug-action-value-converter';
+import { NumberValueConverter } from './value-converters/numberValueConverter';
 
 Aurelia
   .register(
@@ -33,6 +34,6 @@ Aurelia
     AppConfigService,
     ChallengeApiService
   )
-  .register(JugActionValueConverter)
+  .register(JugActionValueConverter, NumberValueConverter)
   .app(Shell)
   .start();
