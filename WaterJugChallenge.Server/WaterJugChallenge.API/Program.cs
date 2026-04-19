@@ -2,17 +2,19 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Enums;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using WaterJugChallenge.BFSSolutionFinder;
 using WaterJugChallenge.API.Controllers;
+using WaterJugChallenge.BFSSolutionFinder;
 using WaterJugChallenge.Interfaces;
 
 namespace WaterJugChallenge.API
@@ -22,6 +24,18 @@ namespace WaterJugChallenge.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins")?.Split(',') ?? Array.Empty<string>();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("LocalhostPolicy",
+                    policy =>
+                    {
+                        policy.WithOrigins(allowedOrigins)
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
 
             builder.Services
                 .AddControllers()
@@ -65,6 +79,8 @@ namespace WaterJugChallenge.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("LocalhostPolicy");
 
             app.MapControllers();
 

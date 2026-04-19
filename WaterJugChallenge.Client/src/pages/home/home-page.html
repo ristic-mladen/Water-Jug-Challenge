@@ -1,0 +1,56 @@
+<import from="../../components/solution-steps/solution-steps"></import>
+<import from="../../components/bucket-color-picker/bucket-color-picker"></import>
+
+<section class="card mb-6 bg-base-100 shadow-xl">
+  <div class="card-body">
+    <h1 class="card-title text-3xl">Water Jug Challenge Solver</h1>
+    <p class="text-base-content/70">Set jug capacities, choose your target amount, and solve instantly.</p>
+
+    <form class="mt-2 grid gap-5" submit.trigger="solve()">
+      <div class="relative grid gap-2 md:grid-cols-[1fr_auto] md:items-end">
+        <label class="form-control w-full">
+          <span class="label-text">Jug 1 capacity</span>
+          <input class="input input-bordered w-full" type="number" min="1" value.bind="form.jug1Capacity & validate">
+        </label>
+        <button class="btn btn-outline" type="button" click.trigger="toggleBucketColorPicker('jug1')">
+          <span class="inline-block h-4 w-4 rounded-full border border-base-content/40" style.bind="{ backgroundColor: jug1Color }"></span>
+          Jug 1 color
+        </button>
+      <bucket-color-picker
+        if.bind="activePicker === 'jug1'"
+        color.bind="jug1Color"
+        on-color-selected.bind="updateJug1Color">
+      </bucket-color-picker>
+      </div>
+
+      <div class="relative grid gap-2 md:grid-cols-[1fr_auto] md:items-end">
+        <label class="form-control w-full">
+          <span class="label-text">Jug 2 capacity</span>
+          <input class="input input-bordered w-full" type="number" min="1" value.bind="form.jug2Capacity & validate">
+        </label>
+        <button class="btn btn-outline" type="button" click.trigger="toggleBucketColorPicker('jug2')">
+          <span class="inline-block h-4 w-4 rounded-full border border-base-content/40" style.bind="{ backgroundColor: jug2Color }"></span>
+          Jug 2 color
+        </button>
+      <bucket-color-picker
+        if.bind="activePicker === 'jug2'"
+        color.bind="jug2Color"
+        on-color-selected.bind="updateJug2Color">
+      </bucket-color-picker>
+      </div>
+
+      <label class="form-control">
+        <span class="label-text">Target amount</span>
+        <input class="input input-bordered" type="number" min="1" value.bind="form.targetAmount & validate">
+      </label>
+
+      <div class="mt-1">
+        <button class="btn btn-primary w-full md:w-auto" type="submit" disabled.bind="isLoading">
+          ${isLoading ? 'Solving...' : 'Find solution'}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<solution-steps steps.bind="currentSteps"></solution-steps>

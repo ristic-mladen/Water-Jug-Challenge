@@ -1,0 +1,23 @@
+<section if.bind="steps.length > 0" class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <h2 class="card-title">Best Found Solution</h2>
+    <div class="overflow-x-auto">
+      <table class="table table-zebra">
+    <thead>
+      <tr>
+        <th>Jug 1 Water Level</th>
+        <th>Jug 2 Water Level</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="step of steps">
+        <td>${step.jug1WaterLevel}</td>
+        <td>${step.jug2WaterLevel}</td>
+        <td>${step.jugAction | jugAction}</td>
+      </tr>
+    </tbody>
+      </table>
+    </div>
+  </div>
+</section>

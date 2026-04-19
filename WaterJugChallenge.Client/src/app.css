@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@plugin "daisyui";
+
+@layer base {
+  body {
+    @apply bg-base-200 min-h-screen;
+  }
+}
