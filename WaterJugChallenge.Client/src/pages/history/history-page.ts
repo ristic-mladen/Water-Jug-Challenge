@@ -4,8 +4,9 @@ import { ChallengeHistoryItem } from '../../models/challenge-history-item';
 import { ChallengeHistoryState } from '../../state/challenge-history-state';
 
 export class HistoryPage implements IStoreSubscriber<ChallengeHistoryState> {
-  public history: ChallengeHistoryItem[] = [];
   private readonly store = resolve(IStore) as IStore<ChallengeHistoryState>;
+  
+  public history: ChallengeHistoryItem[] = [];
 
   public binding(): void {
     this.store.subscribe(this);

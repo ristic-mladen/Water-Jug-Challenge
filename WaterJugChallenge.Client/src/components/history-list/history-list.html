@@ -1,9 +1,14 @@
+<import from="../../components/solution-steps/solution-steps"></import>
+<import from="../../components/history-list-item/history-list-item"></import>
+
 <section class="card bg-base-100 shadow-xl">
   <div class="card-body">
     <h2 class="card-title" t="historyPage.history"></h2>
+
     <div if.bind="items.length === 0" class="alert">
       <span t="historyPage.noHistory"></span>
     </div>
+
     <div if.bind="items.length > 0" class="overflow-x-auto">
       <table class="table table-zebra">
         <thead>
@@ -13,22 +18,39 @@
             <th t="historyPage.jug2"></th>
             <th t="historyPage.targetAmount"></th>
             <th t="historyPage.steps"></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr repeat.for="item of items">
-            <td>${item.requestedAt}</td>
-            <td>
-              <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug1Color }"></span>
-              ${item.jug1Capacity}
-            </td>
-            <td>
-              <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug2Color }"></span>
-              ${item.jug2Capacity}
-            </td>
-            <td>${item.targetAmount}</td>
-            <td>${item.steps.length > 0 ? item.steps.length : 'historyPage.noSolution' & t}</td>
-          </tr>
+          <template repeat.for="item of items">
+            <history-list-item item.bind="item"></history-list-item>
+            <!-- <tr class="hover cursor-pointer transition-colors" click.trigger="toggleRow(item)">
+              <td>${item.requestedAt}</td>
+              <td>
+                <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug1Color }"></span>
+                ${item.jug1Capacity}
+              </td>
+              <td>
+                <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug2Color }"></span>
+                ${item.jug2Capacity}
+              </td>
+              <td>${item.targetAmount}</td>
+              <td>
+                ${item.steps.length > 0 ? item.steps.length : 'historyPage.noSolution' & t}
+              </td>
+              <td>
+                <span class="text-xs transition-transform ${item.isExpanded ? 'rotate-180' : ''}">▼</span>
+              </td>
+            </tr>
+
+            <tr show.bind="item.isExpanded">
+              <td colspan="5" class="bg-base-200/50 p-0">
+                <div class="p-4 border-l-4 border-primary">
+                   <solution-steps steps.bind="item.steps"></solution-steps>
+                </div>
+              </td>
+            </tr> -->
+          </template>
         </tbody>
       </table>
     </div>

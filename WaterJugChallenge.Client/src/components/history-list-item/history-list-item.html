@@ -1,0 +1,28 @@
+<import from="../../components/solution-steps/solution-steps"></import>
+
+<tr class="hover cursor-pointer transition-colors" click.trigger="toggleRow()">
+  <td>${item.requestedAt}</td>
+  <td>
+    <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug1Color }"></span>
+    ${item.jug1Capacity}
+  </td>
+  <td>
+    <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug2Color }"></span>
+    ${item.jug2Capacity}
+  </td>
+  <td>${item.targetAmount}</td>
+  <td>
+    ${item.steps.length > 0 ? item.steps.length : 'historyPage.noSolution' & t}
+  </td>
+  <td>
+    <span class="text-xs transition-transform ${isExpanded ? 'rotate-180' : ''}">▼</span>
+  </td>
+</tr>
+
+<tr show.bind="isExpanded">
+  <td colspan="6" class="bg-base-200/50 p-0">
+    <div class="p-4 border-l-4 border-primary">
+        <solution-steps steps.bind="item.steps"></solution-steps>
+    </div>
+  </td>
+</tr>
