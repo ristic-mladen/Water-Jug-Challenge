@@ -15,7 +15,9 @@
     ${item.steps.length > 0 ? item.steps.length : 'historyPage.noSolution' & t}
   </td>
   <td>
-    <span class="text-xs inline-block transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}">
+    <span 
+      class="text-xs inline-block transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}"
+      show.bind="item.steps.length > 0">
       ▼
     </span>
   </td>
