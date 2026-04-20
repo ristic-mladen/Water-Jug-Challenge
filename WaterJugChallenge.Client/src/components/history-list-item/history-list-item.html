@@ -1,7 +1,7 @@
 <import from="../../components/solution-steps/solution-steps"></import>
 
 <tr class="hover cursor-pointer transition-colors" click.trigger="toggleRow()">
-  <td>${item.requestedAt | dateFormat:'relative' & signal:'update-tick'}</td>
+  <td>${item.requestedAt | dateFormat:'relative' & signal:tickSignal}</td>
   <td>
     <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug1Color }"></span>
     ${item.jug1Capacity}

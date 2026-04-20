@@ -1,12 +1,13 @@
 import { IActionHandler } from '@aurelia/state';
 import { ChallengeHistoryItem } from '../models/challenge-history-item';
+import { ChallengeHistoryActionTypes } from './state-consts';
 
 export interface ChallengeHistoryState {
   history: ChallengeHistoryItem[];
 }
 
 export interface AddHistoryEntryAction {
-  type: 'add-history-entry';
+  type: typeof ChallengeHistoryActionTypes.AddHistoryEntry;
   entry: ChallengeHistoryItem;
 }
 
@@ -21,7 +22,7 @@ export const challengeHistoryActionHandler: IActionHandler<ChallengeHistoryState
   action
 ) => {
   const typedAction = action as ChallengeHistoryAction;
-  if (typedAction.type !== 'add-history-entry') {
+  if (typedAction.type !== ChallengeHistoryActionTypes.AddHistoryEntry) {
     return state;
   }
 

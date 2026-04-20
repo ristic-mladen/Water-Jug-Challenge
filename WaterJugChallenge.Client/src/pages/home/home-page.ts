@@ -9,6 +9,7 @@ import { ToastrService } from '../../services/toastr-service';
 import { UserNotifiedError } from '../../errors/user-notified-error';
 import { AddHistoryEntryAction, ChallengeHistoryState } from '../../state/challenge-history-state';
 import { JugColorsState, SetActiveColorPickerAction, SetJugColorAction } from '../../state/jug-colors-state';
+import { ChallengeHistoryActionTypes, JugColorsActionTypes } from '../../state/state-consts';
 
 type JugColorsStore = IStore<JugColorsState, SetActiveColorPickerAction | SetJugColorAction>;
 type HistoryStore = IStore<ChallengeHistoryState, AddHistoryEntryAction>;
@@ -84,7 +85,7 @@ export class HomePage implements IStoreSubscriber<JugColorsState> {
       this.currentSteps = response.challengeSolutionSteps ?? [];
       this.resultTargetAmount = this.form.targetAmount;
       await this.historyStore.dispatch({
-        type: 'add-history-entry',
+        type: ChallengeHistoryActionTypes.AddHistoryEntry,
         entry: {
           id: crypto.randomUUID(),
           requestedAt: new Date().toISOString(),
@@ -109,15 +110,15 @@ export class HomePage implements IStoreSubscriber<JugColorsState> {
 
   public toggleJugColorPicker(jug: 'jug1' | 'jug2'): void {
     const nextJug = this.activePicker === jug ? null : jug;
-    void this.jugColorsStore.dispatch({ type: 'set-active-color-picker', jug: nextJug });
+    void this.jugColorsStore.dispatch({ type: JugColorsActionTypes.SetActiveColorPicker, jug: nextJug });
   }
 
   public updateJug1Color = (color: string): void => {
-    void this.jugColorsStore.dispatch({ type: 'set-jug-color', jug: 'jug1', color });
+    void this.jugColorsStore.dispatch({ type: JugColorsActionTypes.SetJugColor, jug: 'jug1', color });
   };
 
   public updateJug2Color = (color: string): void => {
-    void this.jugColorsStore.dispatch({ type: 'set-jug-color', jug: 'jug2', color });
+    void this.jugColorsStore.dispatch({ type: JugColorsActionTypes.SetJugColor, jug: 'jug2', color });
   };
 
   public handleStateChange(state: JugColorsState): void {

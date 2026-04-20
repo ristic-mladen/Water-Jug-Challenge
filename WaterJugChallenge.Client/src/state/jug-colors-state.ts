@@ -1,4 +1,5 @@
 import { IActionHandler } from '@aurelia/state';
+import { JugColorsActionTypes } from './state-consts';
 
 export type JugKey = 'jug1' | 'jug2';
 
@@ -9,12 +10,12 @@ export interface JugColorsState {
 }
 
 export interface SetActiveColorPickerAction {
-  type: 'set-active-color-picker';
+  type: typeof JugColorsActionTypes.SetActiveColorPicker;
   jug: JugKey | null;
 }
 
 export interface SetJugColorAction {
-  type: 'set-jug-color';
+  type: typeof JugColorsActionTypes.SetJugColor;
   jug: JugKey;
   color: string;
 }
@@ -30,14 +31,14 @@ export const initialJugColorsState: JugColorsState = {
 export const jugColorsActionHandler: IActionHandler<JugColorsState> = (state, action) => {
   const typedAction = action as JugColorsAction;
 
-  if (typedAction.type === 'set-active-color-picker') {
+  if (typedAction.type === JugColorsActionTypes.SetActiveColorPicker) {
     return {
       ...state,
       activePicker: typedAction.jug
     };
   }
 
-  if (typedAction.type === 'set-jug-color') {
+  if (typedAction.type === JugColorsActionTypes.SetJugColor) {
     return {
       ...state,
       jug1Color: typedAction.jug === 'jug1' ? typedAction.color : state.jug1Color,
