@@ -53,7 +53,7 @@
   </div>
 </section>
 
-<solution-steps steps.bind="currentSteps"></solution-steps>
+<solution-steps steps.bind="currentSteps" target-amount.bind="resultTargetAmount"></solution-steps>
 <section if.bind="hasSearched && currentSteps.length === 0" class="card-title">
   <span t="homePage.noSolutionFound"></span>
 </section>

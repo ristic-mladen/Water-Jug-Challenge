@@ -12,9 +12,15 @@
     </thead>
     <tbody>
       <tr repeat.for="step of steps">
-        <td>${step.jug1WaterLevel}</td>
-        <td>${step.jug2WaterLevel}</td>
-        <td>${step.jugAction | jugAction}</td>
+        <td class="${step.jug1WaterLevel === targetAmount ? 'font-bold' : ''}">
+          ${step.jug1WaterLevel}
+        </td>
+        <td class="${step.jug2WaterLevel === targetAmount ? 'font-bold' : ''}">
+          ${step.jug2WaterLevel}
+        </td>
+        <td>
+          ${step.jugAction | jugAction}
+        </td>
       </tr>
     </tbody>
       </table>

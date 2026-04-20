@@ -23,6 +23,7 @@ export class HomePage implements IStoreSubscriber<JugColorsState> {
   public isLoading = false;
   public hasSearched = false;
   public currentSteps: ChallengeSolutionStep[] = [];
+  public resultTargetAmount: number;
   public jug1Color = '#3b82f6';
   public jug2Color = '#22c55e';
   public activePicker: 'jug1' | 'jug2' | null = null;
@@ -81,6 +82,7 @@ export class HomePage implements IStoreSubscriber<JugColorsState> {
     try {
       const response = await this.challengeApiService.findSolution(this.form);
       this.currentSteps = response.challengeSolutionSteps ?? [];
+      this.resultTargetAmount = this.form.targetAmount;
       await this.historyStore.dispatch({
         type: 'add-history-entry',
         entry: {
