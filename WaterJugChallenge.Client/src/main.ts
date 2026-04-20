@@ -12,7 +12,8 @@ import { jugColorsActionHandler, initialJugColorsState } from './state/jug-color
 import './app.css';
 import * as en from './locale/en/translation.json';
 import { JugActionValueConverter } from './value-converters/jug-action-value-converter';
-import { NumberValueConverter } from './value-converters/numberValueConverter';
+import { NumberValueConverter } from './value-converters/number-value-converter';
+import { DateFormatValueConverter } from './value-converters/date-format-value-converter';
 
 Aurelia
   .register(
@@ -34,6 +35,6 @@ Aurelia
     AppConfigService,
     ChallengeApiService
   )
-  .register(JugActionValueConverter, NumberValueConverter)
+  .register(JugActionValueConverter, NumberValueConverter, DateFormatValueConverter)
   .app(Shell)
   .start();

@@ -6,7 +6,7 @@
     },
     "homePage": {
         "title": "Water Jug Challenge Solver",
-        "description": "Set jug capacities, choose your target amount, and solve instantly.",
+        "description": "Set jug capacities, choose your target amount, and check for best solution!",
         "jug1Capacity": "Jug 1 Capacity",
         "jug2Capacity": "Jug 2 Capacity",
         "targetAmount": "Target Amount",
