@@ -6,20 +6,9 @@ A full-stack implementation of the classic **Water Jug Problem**, featuring a mo
 
 ## 📌 Overview
 
-The **Water Jug Problem** is a classic algorithmic challenge often used in computer science to demonstrate problem-solving strategies such as **state space search (BFS/DFS)** and mathematical reasoning. ([GitHub][1])
+The **Water Jug Problem** is a classic algorithmic challenge often used in computer science to demonstrate problem-solving strategies through **breadth-first-search (BFS) algorithm**.
 
 This project provides a clean, interactive way to explore and solve the problem through a web interface, backed by a robust API.
-
----
-
-## ✨ Features
-
-* 🧠 Solve the Water Jug problem interactively
-* 🔄 Step-by-step solution visualization
-* ⚡ Fast and modern frontend (Aurelia 2 + Vite)
-* 🔧 Backend API for computations (ASP.NET 10)
-* 📦 Monorepo structure with npm tooling
-* 🧩 Separation of concerns (client/server)
 
 ---
 
