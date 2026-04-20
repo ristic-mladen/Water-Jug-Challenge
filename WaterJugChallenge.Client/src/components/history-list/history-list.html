@@ -1,33 +1,33 @@
 <section class="card bg-base-100 shadow-xl">
   <div class="card-body">
-    <h2 class="card-title">History (last 10)</h2>
+    <h2 class="card-title" t="historyPage.history"></h2>
     <div if.bind="items.length === 0" class="alert">
-      <span>No solved challenges yet.</span>
+      <span t="historyPage.noHistory"></span>
     </div>
     <div if.bind="items.length > 0" class="overflow-x-auto">
       <table class="table table-zebra">
         <thead>
           <tr>
-            <th>Requested At</th>
-            <th>Jug 1</th>
-            <th>Jug 2</th>
-            <th>Target</th>
-            <th>Steps</th>
+            <th t="historyPage.requestedAt"></th>
+            <th t="historyPage.jug1"></th>
+            <th t="historyPage.jug2"></th>
+            <th t="historyPage.targetAmount"></th>
+            <th t="historyPage.steps"></th>
           </tr>
         </thead>
         <tbody>
           <tr repeat.for="item of items">
             <td>${item.requestedAt}</td>
             <td>
-              <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style="background-color: ${item.jug1Color};"></span>
+              <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug1Color }"></span>
               ${item.jug1Capacity}
             </td>
             <td>
-              <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style="background-color: ${item.jug2Color};"></span>
+              <span class="mr-2 inline-block h-3 w-3 rounded-full border border-base-content/30" style.bind="{ 'backgroundColor': item.jug2Color }"></span>
               ${item.jug2Capacity}
             </td>
             <td>${item.targetAmount}</td>
-            <td>${item.steps.length}</td>
+            <td>${item.steps.length > 0 ? item.steps.length : 'historyPage.noSolution' & t}</td>
           </tr>
         </tbody>
       </table>

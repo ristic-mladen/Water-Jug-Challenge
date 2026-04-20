@@ -8,7 +8,7 @@ import { AppConfigService } from './services/app-config-service';
 import { ChallengeApiService } from './services/challenge-api-service';
 import { ToastrService } from './services/toastr-service';
 import { challengeHistoryActionHandler, initialChallengeHistoryState } from './state/challenge-history-state';
-import { bucketColorsActionHandler, initialBucketColorsState } from './state/bucket-colors-state';
+import { jugColorsActionHandler, initialJugColorsState } from './state/jug-colors-state';
 import './app.css';
 import * as en from './locale/en/translation.json';
 import { JugActionValueConverter } from './value-converters/jug-action-value-converter';
@@ -20,7 +20,7 @@ Aurelia
     ValidationHtmlConfiguration,
     StateDefaultConfiguration
       .init(initialChallengeHistoryState, challengeHistoryActionHandler)
-      .withStore('bucket-colors', initialBucketColorsState, bucketColorsActionHandler),
+      .withStore('jug-colors', initialJugColorsState, jugColorsActionHandler),
     I18nConfiguration.customize((options) => {
       options.initOptions = {
         resources: {

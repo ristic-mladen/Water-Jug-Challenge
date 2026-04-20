@@ -1,6 +1,6 @@
 import { bindable } from 'aurelia';
 
-export class BucketColorPicker {
+export class JugColorPicker {
   @bindable public color = '#000000';
   @bindable public onColorSelected?: (color: string) => void;
 

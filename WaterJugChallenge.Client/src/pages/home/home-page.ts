@@ -8,12 +8,12 @@ import { ChallengeApiService } from '../../services/challenge-api-service';
 import { ToastrService } from '../../services/toastr-service';
 import { UserNotifiedError } from '../../errors/user-notified-error';
 import { AddHistoryEntryAction, ChallengeHistoryState } from '../../state/challenge-history-state';
-import { BucketColorsState, SetActiveColorPickerAction, SetBucketColorAction } from '../../state/bucket-colors-state';
+import { JugColorsState, SetActiveColorPickerAction, SetJugColorAction } from '../../state/jug-colors-state';
 
-type BucketColorsStore = IStore<BucketColorsState, SetActiveColorPickerAction | SetBucketColorAction>;
+type JugColorsStore = IStore<JugColorsState, SetActiveColorPickerAction | SetJugColorAction>;
 type HistoryStore = IStore<ChallengeHistoryState, AddHistoryEntryAction>;
 
-export class HomePage implements IStoreSubscriber<BucketColorsState> {
+export class HomePage implements IStoreSubscriber<JugColorsState> {
   public readonly form: FindChallengeSolutionRequest = {
     jug1Capacity: 3,
     jug2Capacity: 5,
@@ -21,6 +21,7 @@ export class HomePage implements IStoreSubscriber<BucketColorsState> {
   };
 
   public isLoading = false;
+  public hasSearched = false;
   public currentSteps: ChallengeSolutionStep[] = [];
   public jug1Color = '#3b82f6';
   public jug2Color = '#22c55e';
@@ -31,7 +32,7 @@ export class HomePage implements IStoreSubscriber<BucketColorsState> {
   private readonly validationRules = resolve(IValidationRules);
   private readonly validationController = resolve(newInstanceForScope(IValidationController));
   private readonly historyStore = resolve(IStore) as HistoryStore;
-  private readonly bucketColorsStore = resolve(IStoreRegistry).getStore<BucketColorsState>('bucket-colors') as BucketColorsStore;
+  private readonly jugColorsStore = resolve(IStoreRegistry).getStore<JugColorsState>('jug-colors') as JugColorsStore;
 
   public binding(): void {
     this.validationRules
@@ -55,16 +56,16 @@ export class HomePage implements IStoreSubscriber<BucketColorsState> {
       .withMessage('Target amount must be less than or equal to the largest jug capacity.');
 
     this.validationController.addObject(this.form);
-    this.bucketColorsStore.subscribe(this);
-    this.syncColors(this.bucketColorsStore.getState());
+    this.jugColorsStore.subscribe(this);
+    this.syncColors(this.jugColorsStore.getState());
   }
 
   public unbinding(): void {
     this.validationController.removeObject(this.form);
-    this.bucketColorsStore.unsubscribe(this);
+    this.jugColorsStore.unsubscribe(this);
   }
 
-  public async solve(): Promise<void> {
+  public async findSolution(): Promise<void> {
     const validationResult = await this.validationController.validate();
     if (!validationResult.valid) {
       const messages = validationResult.results
@@ -76,6 +77,7 @@ export class HomePage implements IStoreSubscriber<BucketColorsState> {
     }
 
     this.isLoading = true;
+    this.hasSearched = true;
     try {
       const response = await this.challengeApiService.findSolution(this.form);
       this.currentSteps = response.challengeSolutionSteps ?? [];
@@ -103,24 +105,24 @@ export class HomePage implements IStoreSubscriber<BucketColorsState> {
     }
   }
 
-  public toggleBucketColorPicker(bucket: 'jug1' | 'jug2'): void {
-    const nextBucket = this.activePicker === bucket ? null : bucket;
-    void this.bucketColorsStore.dispatch({ type: 'set-active-color-picker', bucket: nextBucket });
+  public toggleJugColorPicker(jug: 'jug1' | 'jug2'): void {
+    const nextJug = this.activePicker === jug ? null : jug;
+    void this.jugColorsStore.dispatch({ type: 'set-active-color-picker', jug: nextJug });
   }
 
   public updateJug1Color = (color: string): void => {
-    void this.bucketColorsStore.dispatch({ type: 'set-bucket-color', bucket: 'jug1', color });
+    void this.jugColorsStore.dispatch({ type: 'set-jug-color', jug: 'jug1', color });
   };
 
   public updateJug2Color = (color: string): void => {
-    void this.bucketColorsStore.dispatch({ type: 'set-bucket-color', bucket: 'jug2', color });
+    void this.jugColorsStore.dispatch({ type: 'set-jug-color', jug: 'jug2', color });
   };
 
-  public handleStateChange(state: BucketColorsState): void {
+  public handleStateChange(state: JugColorsState): void {
     this.syncColors(state);
   }
 
-  private syncColors(state: BucketColorsState): void {
+  private syncColors(state: JugColorsState): void {
     this.jug1Color = state.jug1Color;
     this.jug2Color = state.jug2Color;
     this.activePicker = state.activePicker;

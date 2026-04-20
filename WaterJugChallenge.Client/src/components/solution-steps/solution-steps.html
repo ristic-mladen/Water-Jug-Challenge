@@ -1,13 +1,13 @@
 <section if.bind="steps.length > 0" class="card bg-base-100 shadow-xl">
   <div class="card-body">
-    <h2 class="card-title">Best Found Solution</h2>
+    <h2 class="card-title" t="homePage.bestFoundSolution"></h2>
     <div class="overflow-x-auto">
       <table class="table table-zebra">
     <thead>
       <tr>
-        <th>Jug 1 Water Level</th>
-        <th>Jug 2 Water Level</th>
-        <th>Action</th>
+        <th t="homePage.jug1WaterLevel"></th>
+        <th t="homePage.jug2WaterLevel"></th>
+        <th t="homePage.action"></th>
       </tr>
     </thead>
     <tbody>
@@ -20,4 +20,8 @@
       </table>
     </div>
   </div>
+</section>
+
+<section if.bind="hasSearched && steps.length === 0" class="card-title">
+  <span t="homePage.noSolutionFound"></span>
 </section>
